@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dataset Captioning UI</title>
+    <link rel="stylesheet" href="/static/vendor/cropper.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<header class="app-header">
+    <div class="title">LoRA Captioning &amp; Cropper</div>
+    <div class="header-actions">
+        <label class="dataset-select">Датасет:
+            <select id="datasetSelect"></select>
+        </label>
+        <button id="refreshBtn" type="button">Обновить список</button>
+        <button id="exportBtn" type="button">Экспорт JSON</button>
+    </div>
+</header>
+<div class="app-layout">
+    <aside class="sidebar">
+        <div class="filter">
+            <input id="imageFilter" type="text" placeholder="Фильтр по имени или тегу">
+        </div>
+        <ul id="imageList" class="image-list"></ul>
+    </aside>
+    <main class="editor">
+        <section class="preview">
+            <div class="preview-inner">
+                <img id="imagePreview" alt="Выберите изображение" />
+            </div>
+            <div class="preview-controls">
+                <div class="crop-actions">
+                    <button id="cropBtn" type="button" class="button-danger">Обрезать</button>
+                </div>
+                <p class="help-text">Кнопка «Обрезать» перезапишет изображение выделенной областью.</p>
+                <div class="resize-controls">
+                    <label for="resizeInput">Макс. сторона, px (×64)</label>
+                    <div class="resize-actions">
+                        <input type="number" id="resizeInput" min="64" step="64" value="1024">
+                        <button id="resizeBtn" type="button">Сжать</button>
+                    </div>
+                </div>
+                <div class="extend-controls">
+                    <button id="extendBtn" type="button">Добить до x64</button>
+                    <div id="extendTiles" class="extend-tiles">
+                        <button type="button" class="extend-tile" data-anchor="lu"></button>
+                        <button type="button" class="extend-tile" data-anchor="cu"></button>
+                        <button type="button" class="extend-tile" data-anchor="ru"></button>
+                        <button type="button" class="extend-tile" data-anchor="lm"></button>
+                        <button type="button" class="extend-tile selected" data-anchor="cm"></button>
+                        <button type="button" class="extend-tile" data-anchor="rm"></button>
+                        <button type="button" class="extend-tile" data-anchor="ld"></button>
+                        <button type="button" class="extend-tile" data-anchor="md"></button>
+                        <button type="button" class="extend-tile" data-anchor="rd"></button>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button id="centerBtn" type="button">Центрировать</button>
+                    <button id="resetBtn" type="button">Сбросить</button>
+                </div>
+                <div class="dimension-info" id="dimensionInfo"></div>
+            </div>
+            </div>
+        </section>
+        <section class="caption-section">
+            <label for="captionInput">Подпись</label>
+            <textarea id="captionInput" rows="5" placeholder="Укажите теги и описание через запятую"></textarea>
+            <div id="suggestions" class="suggestions"></div>
+        </section>
+        <section class="actions">
+            <button id="saveBtn" type="button" class="primary">Сохранить</button>
+            <div class="status" id="statusBar"></div>
+        </section>
+    </main>
+</div>
+<script src="/static/vendor/cropper.min.js"></script>
+<script type="module" src="/static/js/app.js"></script>
+</body>
+</html>
